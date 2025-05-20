@@ -167,9 +167,3 @@ golangci-lint run
 ## 📝 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-## 📞 Contact
-
-Zakir Kun - [@zakirkun](https://twitter.com/zakirkun) - zakir@example.com
-
-Project Link: [https://github.com/zakirkun/rag-chat-bot](https://github.com/zakirkun/rag-chat-bot)
