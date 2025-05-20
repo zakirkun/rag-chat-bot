@@ -1,24 +1,29 @@
-# RAG Chat Bot
+# 🤖 RAG Chat Bot
 
-RAG (Retrieval-Augmented Generation) Chat Bot adalah aplikasi chatbot yang menggunakan teknologi RAG untuk memberikan jawaban yang akurat berdasarkan dokumen yang tersedia. Aplikasi ini menggunakan PostgreSQL dengan ekstensi pgvector untuk menyimpan dan mencari embedding vektor, serta OpenAI untuk menghasilkan embedding dan respons.
+[![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat&logo=go)](https://golang.org)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-336791?style=flat&logo=postgresql)](https://www.postgresql.org)
+[![Docker](https://img.shields.io/badge/Docker-required-2496ED?style=flat&logo=docker)](https://www.docker.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Fitur
+A Retrieval-Augmented Generation (RAG) Chat Bot that provides accurate responses based on available documents. This application uses PostgreSQL with pgvector extension for storing and searching vector embeddings, and OpenAI for generating embeddings and responses.
 
-- Pencarian dokumen berbasis embedding vektor
-- Penyimpanan dan pengambilan konteks percakapan
-- Integrasi dengan OpenAI API untuk embedding dan chat
-- Sistem RAG yang efisien untuk jawaban yang akurat
-- Dukungan untuk metadata dokumen
-- Pencarian similarity dengan HNSW index
+## ✨ Features
 
-## Persyaratan Sistem
+- 🔍 Vector-based document search
+- 💾 Conversation context storage and retrieval
+- 🤝 OpenAI API integration for embeddings and chat
+- 🎯 Efficient RAG system for accurate responses
+- 📝 Document metadata support
+- ⚡ HNSW index for similarity search
 
-- Go 1.21 atau lebih baru
-- PostgreSQL 15 atau lebih baru dengan ekstensi pgvector
-- Docker dan Docker Compose (opsional, untuk deployment)
+## 🛠️ System Requirements
+
+- Go 1.21 or newer
+- PostgreSQL 15 or newer with pgvector extension
+- Docker and Docker Compose (optional, for deployment)
 - OpenAI API key
 
-## Instalasi
+## 🚀 Installation
 
 1. Clone repository:
 ```bash
@@ -26,12 +31,12 @@ git clone https://github.com/zakirkun/rag-chat-bot.git
 cd rag-chat-bot
 ```
 
-2. Salin file konfigurasi:
+2. Copy configuration file:
 ```bash
 cp .env.example .env
 ```
 
-3. Edit file `.env` dan sesuaikan konfigurasi:
+3. Edit `.env` file and adjust configuration:
 ```env
 # Server configuration
 SERVER_PORT=8080
@@ -50,7 +55,7 @@ OPENAI_EMBEDDING_MODEL=text-embedding-ada-002
 OPENAI_CHAT_MODEL=gpt-4
 ```
 
-4. Jalankan database PostgreSQL menggunakan Docker Compose:
+4. Run PostgreSQL database using Docker Compose:
 ```bash
 docker-compose up -d
 ```
@@ -60,109 +65,111 @@ docker-compose up -d
 go mod download
 ```
 
-6. Jalankan aplikasi:
+6. Run the application:
 ```bash
 go run main.go
 ```
 
-## Struktur Database
+## 📊 Database Structure
 
-### Tabel Documents
-- `id`: ID unik dokumen
-- `title`: Judul dokumen
-- `content`: Isi dokumen
-- `metadata`: Metadata dokumen dalam format JSONB
-- `created_at`: Waktu pembuatan dokumen
+### Documents Table
+- `id`: Unique document ID
+- `title`: Document title
+- `content`: Document content
+- `metadata`: Document metadata in JSONB format
+- `created_at`: Document creation timestamp
 
-### Tabel Document Embeddings
-- `id`: ID unik embedding
-- `document_id`: Referensi ke dokumen
-- `embedding`: Vektor embedding (1536 dimensi)
-- `created_at`: Waktu pembuatan embedding
+### Document Embeddings Table
+- `id`: Unique embedding ID
+- `document_id`: Reference to document
+- `embedding`: Vector embedding (1536 dimensions)
+- `created_at`: Embedding creation timestamp
 
-### Tabel Conversations
-- `id`: ID unik percakapan
-- `session_id`: ID sesi pengguna
-- `created_at`: Waktu pembuatan percakapan
+### Conversations Table
+- `id`: Unique conversation ID
+- `session_id`: User session ID
+- `created_at`: Conversation creation timestamp
 
-### Tabel Messages
-- `id`: ID unik pesan
-- `conversation_id`: Referensi ke percakapan
-- `role`: Peran pengirim (user/assistant)
-- `content`: Isi pesan
-- `created_at`: Waktu pengiriman pesan
+### Messages Table
+- `id`: Unique message ID
+- `conversation_id`: Reference to conversation
+- `role`: Sender role (user/assistant)
+- `content`: Message content
+- `created_at`: Message timestamp
 
-## Penggunaan API
+## 🔌 API Usage
 
-### Endpoint Chat
+### Chat Endpoint
 ```http
 POST /api/chat
 Content-Type: application/json
 
 {
     "session_id": "unique-session-id",
-    "message": "Pertanyaan atau pesan pengguna"
+    "message": "User question or message"
 }
 ```
 
-### Endpoint Upload Dokumen
+### Document Upload Endpoint
 ```http
 POST /api/documents
 Content-Type: application/json
 
 {
-    "title": "Judul Dokumen",
-    "content": "Isi dokumen",
+    "title": "Document Title",
+    "content": "Document content",
     "metadata": {
-        "source": "Sumber dokumen",
-        "category": "Kategori dokumen"
+        "source": "Document source",
+        "category": "Document category"
     }
 }
 ```
 
-## Arsitektur
+## 🏗️ Architecture
 
-Aplikasi menggunakan arsitektur modular dengan komponen utama:
+The application uses a modular architecture with main components:
 
 1. **Database Layer**
-   - Menangani operasi database
-   - Mengelola embedding vektor
-   - Menyimpan riwayat percakapan
+   - Handles database operations
+   - Manages vector embeddings
+   - Stores conversation history
 
 2. **RAG Layer**
-   - Mengambil dokumen relevan
-   - Membangun konteks untuk LLM
-   - Mengelola interaksi dengan OpenAI
+   - Retrieves relevant documents
+   - Builds context for LLM
+   - Manages OpenAI interactions
 
 3. **API Layer**
-   - Menangani request HTTP
-   - Mengelola sesi pengguna
-   - Menyediakan endpoint API
+   - Handles HTTP requests
+   - Manages user sessions
+   - Provides API endpoints
 
-## Pengembangan
+## 👨‍💻 Development
 
-### Menjalankan Tests
+### Running Tests
 ```bash
 go test ./...
 ```
 
-### Menjalankan Linter
+### Running Linter
 ```bash
 golangci-lint run
 ```
 
-## Kontribusi
+## 🤝 Contributing
 
-1. Fork repository
-2. Buat branch fitur (`git checkout -b feature/amazing-feature`)
-3. Commit perubahan (`git commit -m 'Add amazing feature'`)
-4. Push ke branch (`git push origin feature/amazing-feature`)
-5. Buat Pull Request
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Lisensi
+## 📝 License
 
-Distribusikan di bawah lisensi MIT. Lihat `LICENSE` untuk informasi lebih lanjut.
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## Kontak
+## 📞 Contact
 
-Link Project: [https://github.com/zakirkun/rag-chat-bot](https://github.com/zakirkun/rag-chat-bot) 
+Zakir Kun - [@zakirkun](https://twitter.com/zakirkun) - zakir@example.com
+
+Project Link: [https://github.com/zakirkun/rag-chat-bot](https://github.com/zakirkun/rag-chat-bot)
