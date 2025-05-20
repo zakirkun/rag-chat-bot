@@ -165,6 +165,4 @@ Distribusikan di bawah lisensi MIT. Lihat `LICENSE` untuk informasi lebih lanjut
 
 ## Kontak
 
-Nama Anda - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Link Project: [https://github.com/yourusername/rag-chat-bot](https://github.com/yourusername/rag-chat-bot) 
+Link Project: [https://github.com/zakirkun/rag-chat-bot](https://github.com/zakirkun/rag-chat-bot) 
